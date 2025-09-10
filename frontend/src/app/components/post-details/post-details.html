@@ -1,0 +1,20 @@
+<div class="container mt-5">
+  <div *ngIf="post">
+    <div class="card shadow-sm">
+      <img [src]="'/assets/images/' + post.detailImage" class="card-img-top post-detail-image" alt="{{ post.title }}">
+      <div class="card-body">
+        <h1 class="card-title text-primary mb-3">{{ post.title }}</h1>
+        <div class="card-text text-muted" [innerHTML]="post.content"></div>
+        <p class="mt-4">
+          <small class="text-info">Categoria: {{ post.categoryName }}</small>
+          <small class="text-muted ms-3">Cliques: {{ post.clicks }}</small>
+        </p>
+        <button (click)="goBack()" class="btn btn-outline-secondary mt-3">Voltar</button>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!post" class="text-center mt-5">
+    <p class="text-danger">Postagem não encontrada.</p>
+    <button (click)="goBack()" class="btn btn-outline-secondary">Voltar</button>
+  </div>
+</div>

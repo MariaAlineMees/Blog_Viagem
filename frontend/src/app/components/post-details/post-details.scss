@@ -1,0 +1,7 @@
+/* frontend/src/app/components/post-detail/post-detail.scss */
+
+.post-detail-image {
+  max-height: 500px; /* Altura máxima para a imagem */
+  object-fit: cover; /* Garante que a imagem cubra o espaço sem distorcer */
+  width: 100%; /* Garante que a imagem ocupe toda a largura */
+}

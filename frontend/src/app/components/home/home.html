@@ -1,0 +1,58 @@
+<div class="container-fluid p-0">
+  <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="assets/images/praias.jpg" class="d-block w-100" alt="Praias Paradisíacas">
+        <div class="carousel-caption d-none d-md-block">
+          <h2 class="text-white">Descubra Destinos Incríveis</h2>
+          <p class="text-white-50">Sua próxima aventura começa aqui!</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="assets/images/montanhas.jpg" class="d-block w-100" alt="Aventura nas Montanhas">
+        <div class="carousel-caption d-none d-md-block">
+          <h2 class="text-white">Aventure-se na Natureza</h2>
+          <p class="text-white-50">Explore trilhas e paisagens de tirar o fôlego.</p>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <img src="assets/images/cidades.jpg" class="d-block w-100" alt="Cultura nas Cidades">
+        <div class="carousel-caption d-none d-md-block">
+          <h2 class="text-white">Imersão Cultural</h2>
+          <p class="text-white-50">Conheça a história e a arte de grandes cidades.</p>
+        </div>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</div>
+<div class="container mt-5">
+  <h2 class="text-center mb-4 text-primary">Últimas Postagens de Viagem</h2>
+  <div class="row">
+    <div class="col-md-4 mb-4" *ngFor="let post of posts">
+      <div class="card h-100 shadow-sm border-0 transform-on-hover">
+        <img [src]="'assets/images/' + post.image" class="card-img-top" alt="{{ post.title }}">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title text-success">{{ post.title }}</h5>
+          <p class="card-text text-muted" [innerHTML]="getSafeSummary(post.content)"></p>
+          <div class="mt-auto d-flex justify-content-between align-items-center">
+            <a [routerLink]="['/post', post.id]" class="btn btn-outline-primary btn-sm">Leia Mais</a>
+            <small class="text-muted">Cliques: {{ post.clicks }}</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
