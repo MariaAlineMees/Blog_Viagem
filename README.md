@@ -37,10 +37,10 @@ A interface do usuário foi construída com Angular, focando em uma experiência
   <img src="https://github.com/MariaAlineMees/Blog_Viagem/blob/main/frontend/src/assets/images/login.jpg" alt="Tela de login do painel administrativo." width="600">
 </p>
 
-    * *Login*: Autenticação para acesso seguro.
-    * *Gerenciamento de Posts*: Adicione, edite ou exclua posts com um formulário intuitivo.
-    * *Gerenciamento de Categorias*: Crie e gerencie as categorias do blog.
-    * *Estatísticas*: Visualize o número de cliques de cada postagem.
+   * *Login*: Autenticação para acesso seguro.
+   * *Gerenciamento de Posts*: Adicione, edite ou exclua posts com um formulário intuitivo.
+   * *Gerenciamento de Categorias*: Crie e gerencie as categorias do blog.
+   * *Estatísticas*: Visualize o número de cliques de cada postagem.
 
 <p align="center">
   <img src="https://github.com/MariaAlineMees/Blog_Viagem/blob/main/frontend/src/assets/images/dashboard-login.jpg" alt="Dashboard do painel administrativo." width="600">
