@@ -1,38 +1,52 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-login',
-  standalone: true,
-  imports: [FormsModule, CommonModule],
   templateUrl: './login.html',
-  styleUrls: ['./login.scss']
+  styleUrls: ['./login.scss'],
+  standalone: true,
+  imports: [
+    FormsModule,
+    CommonModule
+  ]
 })
 export class LoginComponent {
-
   email = '';
   password = '';
   errorMessage = '';
 
-  constructor(
-    private authService: AuthService,
-    private router: Router
-  ) {}
+  constructor(private router: Router) { }
 
-  onLogin(): void {
-    const credentials = { email: this.email, password: this.password };
-    this.authService.login(credentials).subscribe({
-      next: (response) => {
-        localStorage.setItem('token', response.token);
-        this.router.navigate(['/admin/dashboard/manage-posts']);
+  onLogin() {
+    this.errorMessage = '';
+
+    fetch('http://localhost:3000/api/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
       },
-      error: (error) => {
-        this.errorMessage = 'Credenciais inválidas. Tente novamente.';
-        console.error(error);
+      body: JSON.stringify({ email: this.email, password: this.password }),
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Credenciais inválidas.');
       }
+      return response.json();
+    })
+    .then(data => {
+      if (data.token) {
+        localStorage.setItem('authToken', data.token);
+        this.router.navigate(['/admin/dashboard']);
+      } else {
+        throw new Error('Resposta da API inválida: token não encontrado.');
+      }
+    })
+    .catch(error => {
+      this.errorMessage = error.message || 'Ocorreu um erro ao tentar fazer o login. Verifique sua conexão e tente novamente.';
+      console.error('Erro de login:', error);
     });
   }
 }

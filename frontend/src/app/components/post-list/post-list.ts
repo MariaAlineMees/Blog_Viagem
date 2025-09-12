@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { PostService } from '../../services/post';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser'; // Importe DomSanitizer
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser'; 
 
 @Component({
   selector: 'app-post-list',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule],
   templateUrl: './post-list.html',
   styleUrls: ['./post-list.scss']
 })

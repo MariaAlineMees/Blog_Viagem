@@ -1,1 +1,12 @@
-<p>category-list works!</p>
+<div class="category-filter-container">
+    <div class="category-filter">
+        <div class="category-list">
+            <a class="category-item" [routerLink]="['/']">Todos</a>
+            <a *ngFor="let category of categories"
+               class="category-item"
+               [routerLink]="['/category', category.id]">
+               {{ category.name }}
+            </a>
+        </div>
+    </div>
+</div>

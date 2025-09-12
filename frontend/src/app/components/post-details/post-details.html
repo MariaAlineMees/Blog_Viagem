@@ -4,6 +4,9 @@
       <img [src]="'/assets/images/' + post.detailImage" class="card-img-top post-detail-image" alt="{{ post.title }}">
       <div class="card-body">
         <h1 class="card-title text-primary mb-3">{{ post.title }}</h1>
+        
+        <p class="lead">A modificação deve ser aqui.</p>
+
         <div class="card-text text-muted" [innerHTML]="post.content"></div>
         <p class="mt-4">
           <small class="text-info">Categoria: {{ post.categoryName }}</small>

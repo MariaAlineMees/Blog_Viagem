@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CategoryService } from '../../services/category'; // Corrigido para caminho relativo e sem .ts
+import { CategoryService } from '../../services/category';
 import { RouterModule, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -8,8 +8,8 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-navbar',
   standalone: true,
   imports: [RouterModule, CommonModule, FormsModule],
-  templateUrl: './navbar.html', // Verifique se o nome do seu arquivo HTML é este
-  styleUrl: './navbar.scss' // Verifique se o nome do seu arquivo SCSS é este
+  templateUrl: './navbar.html',
+  styleUrl: './navbar.scss'
 })
 export class NavbarComponent implements OnInit {
 
@@ -28,8 +28,12 @@ export class NavbarComponent implements OnInit {
   }
 
   searchPosts(): void {
+    // Redireciona para a página inicial (HomeComponent) com o termo de busca na URL
     if (this.searchTerm.trim()) {
-      this.router.navigate(['/search'], { queryParams: { q: this.searchTerm } });
+      this.router.navigate(['/'], { queryParams: { q: this.searchTerm } });
+    } else {
+      // Se o campo de busca estiver vazio, navega para a página inicial sem parâmetros
+      this.router.navigate(['/']);
     }
   }
 }

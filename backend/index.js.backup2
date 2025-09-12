@@ -8,23 +8,9 @@ const PORT = 3000;
 app.use(cors());
 app.use(express.json());
 
-// Adicione este bloco de código AQUI!
-app.post('/api/login', (req, res) => {
-    const { email, password } = req.body;
-
-    // Lógica simples de verificação de credenciais
-    if (email === 'admin@admin.com' && password === 'admin123') {
-        // Se as credenciais estiverem corretas, envie uma resposta de sucesso com um token
-        const token = 'meu-token-secreto-123';
-        res.json({ token });
-    } else {
-        // Se estiverem incorretas, envie um erro 401 (Não Autorizado)
-        res.status(401).send('Credenciais inválidas.');
-    }
-});
-
 // Serve os arquivos estáticos da pasta assets do front-end
 app.use('/assets', express.static(path.join(__dirname, '../frontend/src/assets')));
+
 // Dados de exemplo (simulando um banco de dados)
 let categories = [
     { id: 1, name: 'Viagem em Família' },
@@ -610,28 +596,27 @@ app.delete('/api/categories/:id', (req, res) => {
     res.status(204).send();
 });
 
-function normalizeString(str) {
-    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-}
-
+// Rotas para Gerenciamento de Postagens
 app.get('/api/posts', (req, res) => {
     const categoryId = req.query.categoryId;
     const searchTerm = req.query.q ? req.query.q.toLowerCase() : '';
 
-    let filteredPosts = [...posts];
+    let filteredPosts = posts;
 
+    // Filtra por categoria, se o parâmetro existir
     if (categoryId) {
         filteredPosts = filteredPosts.filter(p => p.categoryId === parseInt(categoryId));
     }
 
- if (searchTerm) {
-        const normalizedSearchTerm = normalizeString(searchTerm);
-        filteredPosts = filteredPosts.filter(post => 
-            normalizeString(post.title).includes(normalizedSearchTerm) ||
-            normalizeString(post.content).includes(normalizedSearchTerm)
+    // Filtra por termo de busca, se o parâmetro existir
+    if (searchTerm) {
+        filteredPosts = filteredPosts.filter(p =>
+            p.title.toLowerCase().includes(searchTerm) ||
+            p.content.toLowerCase().includes(searchTerm)
         );
     }
-
+    
+    // Opcional: ordenar por data (do mais novo para o mais antigo)
     filteredPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
 
     res.json(filteredPosts);
@@ -685,27 +670,6 @@ app.get('/api/statistics', (req, res) => {
     }));
     res.json(stats);
 });
-
-// Rota para registrar o clique em um post
-app.post('/api/posts/click/:id', (req, res) => {
-    const postId = parseInt(req.params.id);
-    const post = posts.find(p => p.id === postId);
-
-    if (post) {
-        post.clicks += 1; // Incrementa o contador de cliques
-        res.status(200).json({ clicks: post.clicks });
-        console.log(`Cliques do post ${post.title} atualizados para ${post.clicks}`);
-    } else {
-        res.status(404).send('Postagem não encontrada.');
-    }
-});
-
-// Rota para buscar um post por ID (NOVA ROTA)
-app.get('/api/posts/:id', (req, res) => {
-    // ...código da rota existente
-});
-
-//
 
 app.listen(PORT, () => {
     console.log(`🚀 Backend rodando na porta ${PORT}`);

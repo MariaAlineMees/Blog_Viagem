@@ -8,23 +8,9 @@ const PORT = 3000;
 app.use(cors());
 app.use(express.json());
 
-// Adicione este bloco de código AQUI!
-app.post('/api/login', (req, res) => {
-    const { email, password } = req.body;
-
-    // Lógica simples de verificação de credenciais
-    if (email === 'admin@admin.com' && password === 'admin123') {
-        // Se as credenciais estiverem corretas, envie uma resposta de sucesso com um token
-        const token = 'meu-token-secreto-123';
-        res.json({ token });
-    } else {
-        // Se estiverem incorretas, envie um erro 401 (Não Autorizado)
-        res.status(401).send('Credenciais inválidas.');
-    }
-});
-
 // Serve os arquivos estáticos da pasta assets do front-end
 app.use('/assets', express.static(path.join(__dirname, '../frontend/src/assets')));
+
 // Dados de exemplo (simulando um banco de dados)
 let categories = [
     { id: 1, name: 'Viagem em Família' },
@@ -85,7 +71,7 @@ let posts = [
             <h3>Dicas de Viagem</h3>
             <p>A melhor época para visitar Malta é na primavera ou no outono, quando o clima é agradável e a ilha está menos lotada. Use sapatos confortáveis para as caminhadas nas cidades históricas. Leve protetor solar e chapéu, pois o sol é muito forte, especialmente no verão.</p>
         `, 
-        categoryId: 3, 
+        categoryId: 7, 
         clicks: 85, 
         image: 'malta.jpg', 
         detailImage: 'malta2.jpg', 
@@ -128,7 +114,7 @@ let posts = [
             <h3>Dicas de Viagem</h3>
             <p>A melhor época para visitar Las Vegas é na primavera ou no outono, quando as temperaturas são mais amenas. Use sapatos confortáveis, pois você caminhará muito. Leve protetor solar e hidrate-se, já que o clima é muito seco. E, acima de tudo, divirta-se e aproveite a energia única de Vegas.</p>
         `, 
-        categoryId: 5, 
+        categoryId: 1, 
         clicks: 150, 
         image: 'lasvegas.jpg', 
         detailImage: 'lasvegas2.jpg',
@@ -176,7 +162,7 @@ let posts = [
             <h3>Dia 5: O Charme de Notting Hill</h3>
             <p>Passe o seu último dia em Notting Hill, com suas casas coloridas e o famoso Portobello Road Market, perfeito para encontrar antiguidades. Se o tempo permitir, explore a área de South Kensington e visite o Victoria and Albert Museum.</p>
         `, 
-        categoryId: 4, 
+        categoryId: 3, 
         clicks: 180, 
         image: 'londres.jpg', 
         detailImage: 'londres2.jpg',
@@ -220,7 +206,7 @@ let posts = [
             <h3>Dicas de Ouro para sua Viagem</h3>
             <p>Planeje suas visitas com antecedência e verifique os horários de funcionamento. Considere comprar um "Paris Museum Pass" se você planeja visitar vários museus. Lembre-se que muitos museus têm entrada gratuita no primeiro domingo de cada mês. Explore as pequenas galerias de arte no Marais e em Saint-Germain-des-Prés para descobrir artistas locais.</p>
         `, 
-        categoryId: 4, 
+        categoryId: 3, 
         clicks: 210, 
         image: 'paris.jpg',
         detailImage: 'paris2.jpg',
@@ -286,7 +272,7 @@ let posts = [
             <h3>Dicas de Viagem</h3>
             <p>O clima de Miami é quente o ano todo. Use roupas leves, protetor solar e chapéu. Considere alugar um carro para explorar a cidade e seus arredores, como os Everglades. A vida noturna é muito agitada, então prepare-se para as festas, mas lembre-se de sempre beber com moderação.</p>
         `, 
-        categoryId: 2, 
+        categoryId: 3, 
         clicks: 110, 
         image: 'miami.jpg', 
         detailImage: 'miami2.jpg',
@@ -309,7 +295,7 @@ let posts = [
             <h3>Dicas de Viagem</h3>
             <p>A melhor época para visitar a Jamaica é entre novembro e meados de dezembro, quando o clima é agradável e a ilha está menos lotada. Use roupas leves, protetor solar e repelente. Esteja aberto para interagir com os locais e se deixar levar pela vibração "Pura Vida" da ilha.</p>
         `, 
-        categoryId: 2, 
+        categoryId: 7, 
         clicks: 280, 
         image: 'jamaica.jpg', 
         detailImage: 'jamaica2.jpg',
@@ -517,7 +503,7 @@ let posts = [
             <h3>Vida Noturna e Gastronomia</h3>
             <p>Punta del Este é famosa por sua vida noturna, com clubes e bares que ficam abertos até o amanhecer. A cidade tem uma grande variedade de restaurantes, que servem desde frutos do mar frescos até a deliciosa carne uruguaia. Para uma experiência mais autêntica, experimente o "chivito", o sanduíche tradicional do Uruguai.</p>
         `,
-        categoryId: 1,
+        categoryId: 7,
         clicks: 115,
         image: 'punta.jpg',
         detailImage: 'punta2.jpg',
@@ -610,31 +596,9 @@ app.delete('/api/categories/:id', (req, res) => {
     res.status(204).send();
 });
 
-function normalizeString(str) {
-    return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-}
-
+// Rotas para Gerenciamento de Postagens
 app.get('/api/posts', (req, res) => {
-    const categoryId = req.query.categoryId;
-    const searchTerm = req.query.q ? req.query.q.toLowerCase() : '';
-
-    let filteredPosts = [...posts];
-
-    if (categoryId) {
-        filteredPosts = filteredPosts.filter(p => p.categoryId === parseInt(categoryId));
-    }
-
- if (searchTerm) {
-        const normalizedSearchTerm = normalizeString(searchTerm);
-        filteredPosts = filteredPosts.filter(post => 
-            normalizeString(post.title).includes(normalizedSearchTerm) ||
-            normalizeString(post.content).includes(normalizedSearchTerm)
-        );
-    }
-
-    filteredPosts.sort((a, b) => new Date(b.date) - new Date(a.date));
-
-    res.json(filteredPosts);
+    res.json(posts);
 });
 
 app.post('/api/posts', (req, res) => {
@@ -685,27 +649,6 @@ app.get('/api/statistics', (req, res) => {
     }));
     res.json(stats);
 });
-
-// Rota para registrar o clique em um post
-app.post('/api/posts/click/:id', (req, res) => {
-    const postId = parseInt(req.params.id);
-    const post = posts.find(p => p.id === postId);
-
-    if (post) {
-        post.clicks += 1; // Incrementa o contador de cliques
-        res.status(200).json({ clicks: post.clicks });
-        console.log(`Cliques do post ${post.title} atualizados para ${post.clicks}`);
-    } else {
-        res.status(404).send('Postagem não encontrada.');
-    }
-});
-
-// Rota para buscar um post por ID (NOVA ROTA)
-app.get('/api/posts/:id', (req, res) => {
-    // ...código da rota existente
-});
-
-//
 
 app.listen(PORT, () => {
     console.log(`🚀 Backend rodando na porta ${PORT}`);
