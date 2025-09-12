@@ -18,7 +18,7 @@ export class PostService {
       params = params.set('categoryId', categoryId.toString());
     }
    if (searchTerm) {
-      // Normaliza o termo de busca antes de enviar para o backend
+     
       const normalizedSearchTerm = searchTerm.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
       params = params.set('q', normalizedSearchTerm);
     }

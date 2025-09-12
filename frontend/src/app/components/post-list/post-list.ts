@@ -13,7 +13,6 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 export class PostListComponent implements OnInit {
   posts: any[] = [];
   
-  // Injete DomSanitizer no construtor
   constructor(
     private postService: PostService,
     private sanitizer: DomSanitizer 
@@ -25,7 +24,7 @@ export class PostListComponent implements OnInit {
     });
   }
 
-  // Novo método para obter um resumo do conteúdo de forma segura
+  
   getSafeSummary(content: string): SafeHtml {
     const summary = content.replace(/<[^>]*>/g, '').substring(0, 100);
     return this.sanitizer.bypassSecurityTrustHtml(summary);

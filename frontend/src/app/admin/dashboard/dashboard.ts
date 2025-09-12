@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterOutlet, Router } from '@angular/router'; // Adicione 'Router'
+import { RouterLink, RouterOutlet, Router } from '@angular/router'; 
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -10,10 +10,10 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./dashboard.scss']
 })
 export class Dashboard {
-    constructor(private router: Router) { } // Adicione o construtor com o Router
+    constructor(private router: Router) { } 
 
     logout(): void {
-        localStorage.removeItem('authToken'); // Remove o token do localStorage
-        this.router.navigate(['/admin/login']); // Redireciona para a página de login
+        localStorage.removeItem('authToken'); 
+        this.router.navigate(['/admin/login']);
     }
 }

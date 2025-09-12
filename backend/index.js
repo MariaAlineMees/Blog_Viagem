@@ -8,7 +8,7 @@ const PORT = 3000;
 app.use(cors());
 app.use(express.json());
 
-// Adicione este bloco de código AQUI!
+
 app.post('/api/login', (req, res) => {
     const { email, password } = req.body;
 
@@ -23,7 +23,7 @@ app.post('/api/login', (req, res) => {
     }
 });
 
-// Serve os arquivos estáticos da pasta assets do front-end
+
 app.use('/assets', express.static(path.join(__dirname, '../frontend/src/assets')));
 // Dados de exemplo (simulando um banco de dados)
 let categories = [
@@ -702,7 +702,7 @@ app.post('/api/posts/click/:id', (req, res) => {
 
 // Rota para buscar um post por ID (NOVA ROTA)
 app.get('/api/posts/:id', (req, res) => {
-    // ...código da rota existente
+    
 });
 
 //

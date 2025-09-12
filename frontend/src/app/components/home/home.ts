@@ -49,6 +49,5 @@ export class HomeComponent implements OnInit {
     return this.sanitizer.bypassSecurityTrustHtml(summary);
   }
 
-  // O método searchPosts() no HomeComponent não é mais necessário,
-  // pois a lógica de busca é disparada pela mudança na URL.
+  
 }

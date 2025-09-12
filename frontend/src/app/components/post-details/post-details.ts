@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { PostService } from '../../services/post';
 import { CommonModule } from '@angular/common';
 import { Location } from '@angular/common';
-import { HttpClient } from '@angular/common/http'; // Importe o HttpClient
+import { HttpClient } from '@angular/common/http'; 
 
 @Component({
   selector: 'app-post-details',
@@ -20,7 +20,7 @@ export class PostDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private postService: PostService,
     private location: Location,
-    private http: HttpClient // Injetar o HttpClient
+    private http: HttpClient 
   ) { }
 
   ngOnInit(): void {
@@ -29,7 +29,7 @@ export class PostDetailsComponent implements OnInit {
       this.post = post;
     });
 
-    // Chamar a nova função para registrar o clique
+    
     this.registerClick(Number(id));
   }
 
