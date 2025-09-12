@@ -86,7 +86,7 @@ Para rodar o projeto localmente, certifique-se de ter o Node.js e o Angular CLI 
 
 1.  *Clone o repositório:*
     ```bash
-    git clone [https://github.com/MariaAlineMees/Blog_Viagem](https://github.com/MariaAlineMees/Blog_Viagem)
+    git clone (https://github.com/MariaAlineMees/Blog_Viagem)
     ```
 
 2.  *Inicie o Backend:*
@@ -104,5 +104,14 @@ Para rodar o projeto localmente, certifique-se de ter o Node.js e o Angular CLI 
     npm install
     ng serve
     ```
+
+    ### 🚀 Implementações Futuras
+
+Este projeto é uma base sólida para um blog. Em versões futuras, algumas melhorias podem ser implementadas para enriquecer a experiência do usuário e a gestão do conteúdo:
+
+* **Upload de Imagens**: Adicionar um sistema de upload de imagens para que o administrador possa fazer o upload diretamente pelo painel, em vez de usar URLs.
+* **Banco de Dados Real**: Substituir os dados em memória (arrays) por um banco de dados persistente (como MongoDB ou PostgreSQL) para que os dados não sejam perdidos ao reiniciar o servidor.
+* **Autenticação JWT Aprimorada**: Implementar um sistema de autenticação mais robusto com JSON Web Tokens (JWT) para proteger todas as rotas de administração.
+* **Editor de Texto Avançado**: Integrar um editor de texto WYSIWYG (What You See Is What You Get) para facilitar a formatação do conteúdo das postagens (negrito, itálico, listas, etc.).
 
     ## Desenvolvido por  *Maria Aline Mees* 👩🏻‍💻
