@@ -92,7 +92,7 @@ let posts = [
         date: '2025-04-09'
     },
     {   id: 3, 
-        title: 'As Bahamas: Praias de Areia Branca e Mergulho', 
+        title: 'Bahamas: Praias de Areia Branca e Mergulho', 
         content: `
             <p>As Bahamas são um arquipélago de ilhas no Oceano Atlântico, famosas por suas praias de areia branca, águas de um azul deslumbrante e uma vibrante cultura caribenha. Com mais de 700 ilhas e ilhotas, é um paraíso para relaxar, mergulhar e explorar. O que torna este destino único é a grande variedade de ilhas, cada uma com uma personalidade diferente.</p>
             
